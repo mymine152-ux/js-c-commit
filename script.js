@@ -1,6 +1,3 @@
-// ============================================================================
-// HỆ THỐNG QUẢN LÝ HỌC SINH - CÓ LƯU TRỮ LOCALSTORAGE
-// ============================================================================
 // --- 1. LẤY DỮ LIỆU TỪ MÁY (LOCALSTORAGE) ---
 // Tạo một mảng (danh sách) rỗng để chứa thông tin học sinh
 var danhSachHocSinh = [];
