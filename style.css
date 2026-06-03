@@ -1,0 +1,358 @@
+/* ============================================================================
+   HỆ THỐNG QUẢN LÝ HỌC SINH - CSS STYLESHEET
+   Nơi định dạng toàn bộ màu sắc, bố cục, kích thước của trang web.
+============================================================================ */
+
+/* 1. KHAI BÁO BIẾN (CSS Variables) - Đặt ở cấp độ thẻ gốc (:root) để dùng chung */
+:root {
+    --bg-color: #f1f5f9;       /* Màu nền tổng thể (xám nhạt) */
+    --text-main: #1e293b;      /* Màu chữ chính (xanh đen đậm) */
+    --text-muted: #64748b;     /* Màu chữ phụ (xám) */
+    --primary: #3b82f6;        /* Màu chủ đạo (xanh dương) cho nút bấm chính */
+    --primary-hover: #2563eb;  /* Màu xanh dương đậm hơn khi hover vào nút */
+    --success: #10b981;        /* Màu xanh lá cây (hiển thị thành công/giỏi) */
+    --danger: #ef4444;         /* Màu đỏ (hiển thị lỗi/xóa/yếu) */
+    --danger-hover: #dc2626;   /* Màu đỏ đậm khi hover nút xóa */
+    --warning: #f59e0b;        /* Màu cam cảnh báo */
+    --card-bg: #ffffff;        /* Màu nền của các ô form/bảng (Trắng) */
+    --border-color: #e2e8f0;   /* Màu viền */
+}
+
+/* 2. ĐỊNH DẠNG RESET TOÀN TRANG */
+* {
+    box-sizing: border-box; /* Tính cả viền và padding vào chiều rộng/cao */
+    margin: 0; 
+    padding: 0;
+}
+
+body {
+    font-family: 'Outfit', sans-serif; /* Sử dụng font chữ Outfit */
+    background-color: var(--bg-color); /* Lấy màu nền từ biến */
+    color: var(--text-main);           /* Lấy màu chữ từ biến */
+    min-height: 100vh;                 /* Chiều cao tối thiểu bằng màn hình */
+    padding-bottom: 50px;
+}
+
+/* 3. BỐ CỤC CHÍNH (LAYOUT) */
+.app-container {
+    max-width: 1200px; /* Chiều rộng tối đa của toàn trang là 1200px */
+    margin: 0 auto;    /* Căn giữa trang web */
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    padding: 30px 0;
+    margin-bottom: 20px;
+}
+
+.logo {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: -1px;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-top: 5px;
+}
+
+/* Sử dụng Grid để chia màn hình thành 2 cột (Form và Bảng) */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 2.5fr; /* Cột trái chiếm 1 phần, cột phải chiếm 2.5 phần */
+    gap: 30px; /* Khoảng cách giữa 2 cột */
+}
+
+/* Chế độ học sinh: Ẩn form nên cột bảng chiếm toàn bộ không gian */
+.main-content.student-view {
+    grid-template-columns: 1fr;
+}
+
+/* Kỹ thuật Responsive: Khi màn hình nhỏ hơn 900px, chuyển về 1 cột (xếp chồng lên nhau) */
+@media (max-width: 900px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 4. KHỐI HIỂN THỊ (GLASS PANEL / CARDS) */
+.glass-panel {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px; /* Bo góc khối */
+    padding: 25px;
+    /* Đổ bóng nhẹ để khối nổi bật lên khỏi nền */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+h2 {
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: var(--text-main);
+    border-bottom: 2px solid var(--bg-color); /* Gạch chân dưới tiêu đề */
+    padding-bottom: 10px;
+}
+
+/* 5. KHU VỰC FORM NHẬP LIỆU */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.2s; /* Hiệu ứng chuyển động mượt khi tương tác */
+    background-color: #f8fafc;
+}
+
+/* Hiệu ứng khi nhấp chuột vào ô Input */
+.input-group input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    background-color: #fff;
+}
+
+/* Sắp xếp 2 ô điểm ngang nhau */
+.scores-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+/* Thông báo lỗi ở Form */
+.form-msg {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    min-height: 20px;
+}
+.form-msg.error { color: var(--danger); }
+.form-msg.success { color: var(--success); }
+
+/* Chứa các nút Lưu/Hủy */
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Định dạng chung cho mọi loại Nút (Button) */
+.btn-primary, .btn-secondary, .btn-danger, .btn-edit {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+/* Nút chính (Màu Xanh Dương) */
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+    flex: 1; /* Nút chính sẽ chiếm phần lớn chiều rộng */
+}
+.btn-primary:hover { background-color: var(--primary-hover); }
+
+/* Nút phụ (Màu Xám nhạt) */
+.btn-secondary {
+    background-color: var(--bg-color);
+    color: var(--text-muted);
+}
+.btn-secondary:hover { background-color: var(--border-color); color: var(--text-main); }
+
+/* 6. KHU VỰC BẢNG (TABLE) CHỨA DANH SÁCH */
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--bg-color);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+.table-header h2 {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* Khối đếm số lượng học sinh */
+.stats {
+    font-weight: 600;
+    color: var(--primary);
+    background: #eff6ff;
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+
+/* Đảm bảo bảng có thể cuộn ngang nếu màn hình quá hẹp */
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Bỏ viền đôi mặc định của HTML table */
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Dòng tiêu đề của bảng */
+th {
+    background-color: #f8fafc;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+/* Hiệu ứng mờ khi di chuột qua từng dòng của bảng */
+tr:hover {
+    background-color: #f8fafc;
+}
+
+.empty-msg {
+    text-align: center;
+    padding: 30px;
+    color: var(--text-muted);
+    font-style: italic;
+    display: none;
+}
+
+/* Nhãn Xếp loại (Huy hiệu - Badge) */
+.badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+/* Màu sắc dựa theo phân loại Điểm trong JS */
+.badge.excellent { background: #dcfce7; color: #166534; } /* Giỏi */
+.badge.good { background: #fef3c7; color: #92400e; }      /* Khá */
+.badge.average { background: #e0e7ff; color: #3730a3; }   /* TB */
+.badge.poor { background: #fee2e2; color: #991b1b; }      /* Yếu */
+
+/* Các Nút Sửa/Xóa trong bảng */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-edit {
+    background-color: #e0e7ff;
+    color: var(--primary);
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+.btn-edit:hover { background-color: #c7d2fe; }
+
+.btn-danger {
+    background-color: #fee2e2;
+    color: var(--danger);
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+.btn-danger:hover { background-color: #fecaca; }
+
+/* 7. MODAL (Hộp thoại bật lên) */
+.modal {
+    display: none; /* Ban đầu ẩn đi */
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Màn đen mờ */
+    backdrop-filter: blur(4px);     /* Hiệu ứng làm mờ nền phía sau */
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+/* JS sẽ thêm class này để hiển thị Modal */
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    padding: 30px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    animation: slideUp 0.3s ease-out; /* Hoạt ảnh trượt lên mượt mà */
+}
+
+/* Định nghĩa hoạt ảnh Trượt Lên */
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-content h2 {
+    color: var(--primary);
+    border: none;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    margin-bottom: 25px;
+    color: var(--text-muted);
+}
+
+/* 8. LOGIN OVERLAY */
+.login-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: var(--bg-color);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.login-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.login-panel {
+    width: 400px;
+    max-width: 90%;
+    text-align: center;
+}
+
+.login-title {
+    color: var(--primary);
+    border: none;
+    font-size: 2rem;
+    margin-bottom: 25px;
+}
+
+.login-btn {
+    width: 100%;
+    margin-top: 15px;
+    font-size: 1.1rem;
+    padding: 12px;
+}
